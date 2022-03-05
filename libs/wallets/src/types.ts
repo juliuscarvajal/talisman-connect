@@ -62,9 +62,19 @@ interface WalletErrors {
   transformError: (err: WalletError) => Error;
 }
 
+// Provide web3* functions for consistency with existing Dapps using @polkadot/extension-dapp
+interface Web3Funcs {
+  web3Enable: (dappName: string) => unknown;
+  web3Accounts: () => unknown;
+  web3FromAddress: () => unknown;
+  web3ListRpcProviders?: () => unknown;
+  web3UseRpcProvider?: () => unknown;
+}
+
 export interface Wallet
   extends WalletData,
     WalletExtension,
     Connector,
     Signer,
+    Web3Funcs,
     WalletErrors {}
